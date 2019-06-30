@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer");
 const email = process.env.EMAIL;
 const pass = process.env.PASS;  
 
+console.log(email)
 const latLocation = 60; 
 const lonLocation = 5; 
 axios.get("https://api.met.no/weatherapi/lightning/1.0/available").then((res) => {
@@ -66,7 +67,7 @@ async function sendMail(data) {
 
     try {
     let info = await transporter.sendMail({
-        from: "Lightning information <LightningStrikeInfo>",
+        from: "Lightning information <"+email+">",
         to: email,
         subject: "Lightning Strike Information",
         text: data
