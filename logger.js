@@ -1,7 +1,8 @@
 const axios = require("axios"); 
 const converter = require("xml-js"); 
 const nodemailer = require("nodemailer"); 
-const email = ""; 
+const email = process.env.EMAIL;
+const pass = process.env.PASS;  
 
 const latLocation = 60; 
 const lonLocation = 5; 
@@ -57,16 +58,16 @@ async function sendMail(data) {
         port: 587,
         secure: false,
         auth: {
-            user: "",
-            pass: ""
+            user: email,
+            pass: pass
         }
     });
 
 
     try {
     let info = await transporter.sendMail({
-        from: "Lightning information <stigakl@outlook.com",
-        to: "stigakl@outlook.com",
+        from: "Lightning information <LightningStrikeInfo>",
+        to: email,
         subject: "Lightning Strike Information",
         text: data
     });
