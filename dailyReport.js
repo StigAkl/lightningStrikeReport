@@ -18,13 +18,13 @@ axios.get("https://api.met.no/weatherapi/lightning/1.0/available").then((res) =>
     let lastAvailableDate = elms.elements[elms.elements.length-2].elements[0].elements[1].elements[0].text
 
     if(lastAvailableDate!==logFileData.lastData) {
-
-        console.log("New")
         console.log(lastAvailableDate + " : " + logFileData.lastData)
 
         let newLogData = {
             lastData: lastAvailableDate,
-            closest: logFileData.closest
+            closest: logFileData.closest,
+            lon: logFileData.lon,
+            lat: logFileData.lat
         }
 
         axios.get(lastAvailableUrl).then((res) => {
@@ -41,6 +41,8 @@ axios.get("https://api.met.no/weatherapi/lightning/1.0/available").then((res) =>
                     let distance = calcDistance(lat, lon, latLocation, lonLocation);  
                     if(newLogData.closest > distance) {
                         newLogData.closest=distance;
+                        newLogData.lon = lon; 
+                        newLogData.lat = lat; 
                     }
                 }
             })
