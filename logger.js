@@ -2,10 +2,10 @@ const axios = require("axios");
 const converter = require("xml-js"); 
 const nodemailer = require("nodemailer"); 
 const email = process.env.EMAIL;
-const pass = process.env.PASS;  
+const pass = process.env.PASS;
+const latLocation = 60.549; 
+const lonLocation = 5.53; 
 
-const latLocation = 60; 
-const lonLocation = 5; 
 axios.get("https://api.met.no/weatherapi/lightning/1.0/available").then((res) => {
     
     const data = converter.xml2json(res.data)
@@ -44,7 +44,7 @@ axios.get("https://api.met.no/weatherapi/lightning/1.0/available").then((res) =>
             }
         });
 
-        if(shortestDistance < 1000) {
+        if(shortestDistance < 50) {
             let mailText = `Nearby Lightning Strike detected ${shortestDistance} kilometers away at location ${shortestLat},${shortestLon}`;
             sendMail(mailText); 
         }
