@@ -14,7 +14,7 @@
     "install": "^0.12.2",
     "kelvin-to-celsius": "^1.1.0",
     "nodemailer": "^6.2.1",
-    "npm": "^6.9.2",
+    "npm": "^6.14.6",
     "xml-js": "^1.6.11"
   }
 }
